@@ -1,7 +1,7 @@
 {
   "name": "flyg",
   "version": "0.0.5",
-  "description": "",
+  "description": "Flyg is a simple library for building components with javascript.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "files": [
