@@ -1,4 +1,4 @@
-const isElement = (element: unknown) => {
+const isElement = (element: unknown): element is Element => {
   return element instanceof Element;
 };
 
@@ -14,30 +14,31 @@ export const flyg = <T>(
   ...values: unknown[]
 ) => {
   let html = ``;
-  const children: Record<number, HTMLElement> = {};
+  const children: Record<string, Element> = {};
 
   for (let index = 0; index < templateStringsArray.length; index++) {
+    const element = values[index];
     const text = templateStringsArray[index];
 
     html += text;
 
     if (
-      typeof values[index] === "string" ||
-      typeof values[index] === "number" ||
-      typeof values[index] === "boolean"
+      typeof element === "string" ||
+      typeof element === "number" ||
+      typeof element === "boolean"
     ) {
-      html += values[index];
+      html += element;
     }
 
-    if (typeof values[index] === "object") {
-      if (!isElement(values[index])) {
+    if (typeof element === "object") {
+      if (!isElement(element)) {
         throw new Error(
           `Value must be a string, number, boolean or a DOM element`
         );
       }
 
       const key = `flyg-${index}`;
-      children[key] = values[index];
+      children[key] = element;
       html += `<template id="${key}"></template>`;
     }
   }
@@ -45,7 +46,7 @@ export const flyg = <T>(
   const component = createElementFromHTML<T>(html);
 
   Object.entries(children).forEach(([key, value]) => {
-    (component as unknown as HTMLElement)
+    (component as unknown as Element)
       .querySelector(`template#${key}`)
       .replaceWith(value);
   });
