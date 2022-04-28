@@ -17,28 +17,28 @@ export const flyg = <T>(
   const children: Record<string, Element> = {};
 
   for (let index = 0; index < templateStringsArray.length; index++) {
-    const element = values[index];
+    const value = values[index];
     const text = templateStringsArray[index];
 
     html += text;
 
     if (
-      typeof element === "string" ||
-      typeof element === "number" ||
-      typeof element === "boolean"
+      typeof value === "string" ||
+      typeof value === "number" ||
+      typeof value === "boolean"
     ) {
-      html += element;
+      html += value;
     }
 
-    if (typeof element === "object") {
-      if (!isElement(element)) {
+    if (typeof value === "object") {
+      if (!isElement(value)) {
         throw new Error(
           `Value must be a string, number, boolean or a DOM element`
         );
       }
 
       const key = `flyg-${index}`;
-      children[key] = element;
+      children[key] = value;
       html += `<template id="${key}"></template>`;
     }
   }
