@@ -16,7 +16,7 @@ Import to project:
 import { flyg } from "flyg";
 ```
 
-## Exampels
+## Examples
 
 Create a component with a type:
 
