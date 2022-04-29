@@ -44,6 +44,14 @@ it("should return a element from a html string with multiple elements as childre
   expect(component.outerHTML).toBe("<div><p>hey</p><div><p>2</p></div></div>");
 });
 
+it("html encodes strings passed as values", () => {
+  const value = `<b onmouseover=alert('XSS')>hey</b>`;
+  const component = flyg<HTMLElement>`<div>${value}</div>`;
+  expect(component.outerHTML).toBe(
+    "<div>&lt;b onmouseover=alert('XSS')&gt;hey&lt;/b&gt;</div>"
+  );
+});
+
 it("throws error if value differs from string, number, boolean and elements", () => {
   function createComponent() {
     flyg<HTMLElement>`<div>${{}}</div>`;
