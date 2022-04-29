@@ -2,7 +2,13 @@ const isElement = (element: unknown): element is Element => {
   return element instanceof Element;
 };
 
-export const createElementFromHTML = <T>(html: string): T => {
+const htmlEncode = (value) => {
+  return String(value).replace(/[^\w. ]/gi, (char) => {
+    return "&#" + char.charCodeAt(0) + ";";
+  });
+};
+
+const createElementFromHTML = <T>(html: string): T => {
   let template = document.createElement("template");
   html = html.trim();
   template.innerHTML = html;
@@ -27,7 +33,7 @@ export const flyg = <T>(
       typeof value === "number" ||
       typeof value === "boolean"
     ) {
-      html += value;
+      html += htmlEncode(value);
     }
 
     if (typeof value === "object") {

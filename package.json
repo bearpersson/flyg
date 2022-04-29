@@ -10,7 +10,7 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "start:TodoApp": "parcel ./exampels/TodoApp/index.html"
+    "start:TodoApp": "parcel ./examples/TodoApp/index.html"
   },
   "author": "",
   "license": "ISC",

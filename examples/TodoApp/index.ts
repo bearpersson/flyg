@@ -6,7 +6,7 @@ const TodoApp = (state) => {
 
   const onSubmit = (value) => {
     state.push(value);
-    list.actions.renderItems(state);
+    list.actions.renderItems();
   };
 
   const component = flyg<HTMLElement>`
