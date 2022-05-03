@@ -20,14 +20,10 @@ export const flyg = <T>(
   ...values: unknown[]
 ) => {
   let html = ``;
+  
   const children: Record<string, Element> = {};
 
-  for (let index = 0; index < templateStringsArray.length; index++) {
-    const value = values[index];
-    const text = templateStringsArray[index];
-
-    html += text;
-
+  const renderValue = (value: unknown, key: string) => {
     if (
       typeof value === "string" ||
       typeof value === "number" ||
@@ -37,19 +33,29 @@ export const flyg = <T>(
     }
 
     if (typeof value === "object") {
+      if(Array.isArray(value)) {
+        value.forEach((item, index) => renderValue(item, `${key}-${index}`));
+        return;
+      }      
+
       if (!isElement(value)) {
         throw new Error(
           `Value must be a string, number, boolean or a DOM element`
         );
       }
 
-      const key = `flyg-${index}`;
       children[key] = value;
       html += `<template id="${key}"></template>`;
     }
   }
 
-  const component = createElementFromHTML<T>(html);
+  for (let index = 0; index < templateStringsArray.length; index++) {
+    const text = templateStringsArray[index];
+    html += text;
+    renderValue(values[index], `flyg-${index}`);
+  }
+
+  const component = createElementFromHTML<T>(html);    
 
   Object.entries(children).forEach(([key, value]) => {
     (component as unknown as Element)
