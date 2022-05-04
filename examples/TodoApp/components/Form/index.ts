@@ -1,4 +1,4 @@
-import { flyg } from "../../../src";
+import { flyg } from "../../../../src";
 
 export const Form = ({ onSubmit }) => {
   const textInput = flyg<HTMLInputElement>`<input type="text"></input>`;

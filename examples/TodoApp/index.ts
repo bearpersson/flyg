@@ -20,4 +20,6 @@ const TodoApp = (state) => {
   return component;
 };
 
-document.body.appendChild(TodoApp(["Use flyg in your next project"]));
+const appState = ["Use flyg in your next project"];
+
+document.body.appendChild(TodoApp(appState));
