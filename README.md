@@ -1,6 +1,6 @@
 # ✈️ Flyg
 
-Flyg is a simple library for building components with javascript.
+Flyg is a simple library for building components with javascript template literals. In addition to standard string interpolation, flyg offers the ability to interpolate dom elements and keeping its references for further manipulation and event binding.
 
 ## Installation
 
