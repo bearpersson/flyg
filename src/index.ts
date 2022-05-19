@@ -49,8 +49,7 @@ export const flyg = <T>(
   }
 
   for (let index = 0; index < templateStringsArray.length; index++) {
-    const text = templateStringsArray[index];
-    html += text;
+    html += templateStringsArray[index];
     renderValue(values[index], index.toString());
   }
 
