@@ -31,7 +31,9 @@ export const flyg = <T>(
       html += htmlEncode(value);
     } else if(typeof value === "object") {
       if(Array.isArray(value)) {
-        value.forEach((item, index) => renderValue(item, `${key}-${index}`));
+        for (let index = 0; index < value.length; index++) {
+          renderValue(value[index], `${key}-${index}`);
+        }
         return;
       }      
 
@@ -54,11 +56,11 @@ export const flyg = <T>(
 
   const component = createElementFromHTML<T>(html);    
 
-  Object.entries(children).forEach(([key, value]) => {
+  for (const key in children) {
     (component as unknown as Element)
       .querySelector(`template#${key}`)
-      .replaceWith(value);
-  });
-
+      .replaceWith(children[key]);
+  }
+  
   return component;
 };
