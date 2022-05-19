@@ -10,8 +10,7 @@ const htmlEncode = (value) => {
 
 const createElementFromHTML = <T>(html: string): T => {
   const template = document.createElement("template");
-  html = html.trim();
-  template.innerHTML = html;
+  template.innerHTML = html.trim();
   return template.content.firstChild as unknown as T;
 };
 
