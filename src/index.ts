@@ -1,7 +1,3 @@
-const isElement = (element: unknown): element is Element => {
-  return element instanceof Element;
-};
-
 const htmlEncode = (value) => {
   return String(value).replace(/[^\w. ]/gi, (char) => {
     return "&#" + char.charCodeAt(0) + ";";
@@ -37,7 +33,7 @@ export const flyg = <T>(
         return;
       }      
 
-      if (!isElement(value)) {
+      if (!(value instanceof Element)) {
         throw new Error(
           `Value must be a string, number, boolean or a DOM element`
         );
