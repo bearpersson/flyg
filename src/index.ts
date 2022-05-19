@@ -44,21 +44,21 @@ export const flyg = <T>(
       }
 
       children[key] = value;
-      html += `<template id="${key}"></template>`;
+      html += `<template data-flyg="${key}"></template>`;
     }
   }
 
   for (let index = 0; index < templateStringsArray.length; index++) {
     const text = templateStringsArray[index];
     html += text;
-    renderValue(values[index], `flyg-${index}`);
+    renderValue(values[index], index.toString());
   }
 
   const component = createElementFromHTML<T>(html);    
 
   for (const key in children) {
     (component as unknown as Element)
-      .querySelector(`template#${key}`)
+      .querySelector(`template[data-flyg="${key}"]`)
       .replaceWith(children[key]);
   }
   
