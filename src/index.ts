@@ -29,9 +29,7 @@ export const flyg = <T>(
       typeof value === "boolean"
     ) {
       html += htmlEncode(value);
-    }
-
-    if (typeof value === "object") {
+    } else if(typeof value === "object") {
       if(Array.isArray(value)) {
         value.forEach((item, index) => renderValue(item, `${key}-${index}`));
         return;
